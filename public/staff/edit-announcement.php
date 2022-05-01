@@ -2,26 +2,24 @@
 require_once('../../private/initialize.php'); 
 require_login();
 
-if(!isset($_GET['announcement_id'])) {
-  redirect_to(url_for('/staff/announcements.php'));
-}
-
-// Get the value and assign it to a local variable
 $id = $_GET['announcement_id'];
+$announcement_employee = find_all_announcements_and_employee_by_announcement_id($id);
 
 if(is_post_request()) {
   // Handle form values sent by new.php
   $announcement = [];
   $announcement['announcement'] = $_POST['announcement'] ?? '';
-  // Could do form validations here...although best to do it in the function below
+
   $result = update_only_announcement_of_user($announcement, $id);
   if($result === true) {
-    $_SESSION['message'] = 'The announcement was updated successfully.';
+    if($announcement_employee['employee_id'] === $_SESSION['logged_employee_id']) {
+      $_SESSION['message'] = 'The announcement was updated successfully.';
+    } else {
+      $_SESSION['message'] = 'Sorry you cannot update this announcement.';
+    }
     redirect_to(url_for('staff/announcements.php'));
   } else {
-    $_SESSION['message'] = 'Sorry you cannot update this announcement.';
-    redirect_to(url_for('staff/announcements.php'));
-    // $errors = $result;
+    $errors = $result;
   }
 
 } else {
@@ -53,6 +51,7 @@ if(is_post_request()) {
         <div id="user-info">
           <p>Welcome <?php echo $_SESSION['username']; ?></p>
           <p>You are logged in as - <?php echo $_SESSION['user_level']; ?></p>
+          <l1 id="logout"><a href="<?php echo url_for('../public/logout.php'); ?>">Logout <?php echo $_SESSION['username']; ?></a></l1>
         </div>
       </header>
       <!-- Navigation -->
@@ -64,7 +63,6 @@ if(is_post_request()) {
               <l1><a href="announcements.php">Announcements</a></l1>
               <l1><a href="images.php">Images</a></l1>
               <l1><a href="employee_list.php">Employees</a></l1>
-              <l1><a href="<?php echo url_for('../public/logout.php'); ?>">Logout <?php echo $_SESSION['username']; ?></a></l1>
             </ul>
           </nav>
         </aside>

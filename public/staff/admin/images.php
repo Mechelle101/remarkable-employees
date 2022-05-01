@@ -14,42 +14,43 @@ if(isset($_POST['submit']) && isset($_FILES['file_name'])) {
   $error = $_FILES['file_name']['error'];
     
   if ($error === 0) {
+    // checking for the image size
     if ($img_size > 2000000) {
-      $error_msg = "Sorry, your file is too large.";
-      header("Location: images.php?error=$error_msg");
+      $_SESSION['message'] = "Sorry, your file is too large.";
+      redirect_to(url_for('staff/admin/images.php'));
+
+    // checking for correct format
     } else {
       $img_ex = pathinfo($img_file_name, PATHINFO_EXTENSION);
       $img_ex_lc = strtolower($img_ex);
-      
       $allowed_exs = ['jpg', 'jpeg', 'png', 'tiff', 'jpg'];
-      
+
+      // all is good sending image to the file
       if (in_array($img_ex_lc, $allowed_exs)) {
         $new_image_file_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
         $image_upload_path = '../../upload-images/' . $new_image_file_name;
         move_uploaded_file($tmp_name, $image_upload_path);
-        
-        // THIS IS NOT SHOWING MY CONFIRMATION MESSAGE
+
+        // inserting image name into the database table
         $result = insert_image($new_image_file_name, $image);
-        
         if($result === true) {
-          $_SESSION['message'] = 'The image was uploaded successfully.';
-          header('Location: images.php');
+          $_SESSION['message'] = "Your image was uploaded successfully.";
+          redirect_to(url_for('staff/admin/images.php'));
         }
         
       } else {
-        $error_msg = "You cannot upload $img_ex_lc files";
-        header("Location: images.php?error=$error_msg");
+        $_SESSION['message'] = "You cannot upload $img_ex_lc files";
+        redirect_to(url_for('staff/admin/images.php'));
       }
       
-    }
+    } 
   } else {
-    $error_msg= "unknown error occurred";
-    header("Location: images.php?error=$error_msg");
+    $_SESSION['message'] = "unknown error occurred";
+    redirect_to(url_for('staff/admin/images.php'));
   }
   
-} else {
-  //header("Location: images.php");
-}
+} 
+
 ?>
 
 <!DOCTYPE html>
@@ -74,6 +75,7 @@ if(isset($_POST['submit']) && isset($_FILES['file_name'])) {
         <div id="user-info">
           <p>Welcome <?php echo $_SESSION['username']; ?></p>
           <p>You are logged in as - <?php echo $_SESSION['user_level']; ?></p>
+          <l1 id="logout"><a href="<?php echo url_for('../public/logout.php') ?>">Logout <?php echo $_SESSION['username']; ?></a></l1>
         </div>
       </header>
       <!-- Navigation -->
@@ -85,7 +87,6 @@ if(isset($_POST['submit']) && isset($_FILES['file_name'])) {
               <l1><a href="announcements.php">Announcements</a></l1>
               <l1><a href="images.php">Images</a></l1>
               <l1><a href="employee_list.php">Employees</a></l1>
-              <l1><a href="<?php echo url_for('../public/logout.php'); ?>">Logout <?php echo $_SESSION['username']; ?></a></l1>
             </ul>
           </nav>
         </aside>

@@ -57,6 +57,7 @@ if(is_post_request()) {
         <div id="user-info">
           <p>Welcome <?php echo $_SESSION['username']; ?></p>
           <p>You are logged in as - <?php echo $_SESSION['user_level']; ?></p>
+          <l1 id="logout"><a href="<?php echo url_for('../public/logout.php') ?>">Logout <?php echo $_SESSION['username']; ?></a></l1>
         </div>
       </header>
       <!-- Navigation -->
@@ -68,7 +69,6 @@ if(is_post_request()) {
               <l1><a href="announcements.php">Announcements</a></l1>
               <l1><a href="images.php">Images</a></l1>
               <l1><a href="employee_list.php">Employees</a></l1>
-              <l1><a href="<?php echo url_for('../public/logout.php'); ?>">Logout <?php echo $_SESSION['username']; ?></a></l1>
             </ul>
           </nav>
         </aside>
@@ -98,7 +98,7 @@ if(is_post_request()) {
               <input type="text" id="email" name="email" value="<?php echo h($employee['email']); ?>"><br>
               <br>
               <label for="username">Username</label><br>
-              <input type="text" id="username" name="username" value="<?php //echo h($employee['username']); ?>"><br>
+              <input type="text" id="username" name="username" value="<?php echo h($employee['username']); ?>"><br>
               <br>
               <p>Password should be at least 8 characters, 
               <br>include at least one uppercase, lowercase, number, and symbol.</p>

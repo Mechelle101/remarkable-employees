@@ -10,11 +10,13 @@ if(is_post_request()) {
 
   $result = delete_only_announcement_of_user($id);
   if($result === true) {
-    // THIS COMES UP TRUE EVEN IF THE FIELD IS NOT EDITED...
-    $_SESSION['message'] = 'Announcement was deleted.';
+    if($announcement['employee_id'] === $_SESSION['logged_employee_id']) {
+      $_SESSION['message'] = 'Announcement was deleted.';
+    } else {
+      $_SESSION['message'] = 'Sorry, you cannot delete this announcement.';
+    }
     redirect_to(url_for('/staff/announcements.php'));
   } else {
-    $_SESSION['message'] = 'Sorry, you cannot delete this announcement.';
     redirect_to(url_for('/staff/announcements.php'));
     echo mysqli_error($db);
     db_disconnect($db);
@@ -46,6 +48,7 @@ if(is_post_request()) {
         <div id="user-info">
           <p>Welcome <?php echo $_SESSION['username']; ?></p>
           <p>You are logged in as - <?php echo $_SESSION['user_level']; ?></p>
+          <l1 id="logout"><a href="<?php echo url_for('../public/logout.php'); ?>">Logout <?php echo $_SESSION['username']; ?></a></l1>
         </div>
       </header>
       <!-- Navigation -->
@@ -57,7 +60,6 @@ if(is_post_request()) {
               <l1><a href="announcements.php">Announcements</a></l1>
               <l1><a href="images.php">Images</a></l1>
               <l1><a href="employee_list.php">Employees</a></l1>
-              <l1><a href="<?php echo url_for('../public/logout.php'); ?>">Logout <?php echo $_SESSION['username']; ?></a></l1>
             </ul>
           </nav>
         </aside>

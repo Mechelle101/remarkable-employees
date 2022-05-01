@@ -10,13 +10,15 @@ $image = find_all_images_and_employee_by_image_id($id);
 if(is_post_request()) {
 
   $result = delete_only_image_of_user($id);
-  // $result  = delete_image($id);
   if($result === true) {
-    $_SESSION['message'] = 'Image was deleted.';
-    echo display_session_message(); 
+    if($image['employee_id'] === $_SESSION['logged_employee_id']) {
+      $_SESSION['message'] = 'The image was deleted successfully';
+    } else {
+      $_SESSION['message'] = 'Sorry you cannot delete this image.';
+    }
+    //echo display_session_message(); 
     redirect_to(url_for('/staff/admin/images.php'));
   } else {
-    // the delete failed
     echo mysqli_error($db);
     db_disconnect($db);
     exit;
@@ -47,6 +49,7 @@ if(is_post_request()) {
         <div id="user-info">
           <p>Welcome <?php echo $_SESSION['username']; ?></p>
           <p>You are logged in as - <?php echo $_SESSION['user_level']; ?></p>
+          <l1 id="logout"><a href="<?php echo url_for('../public/logout.php') ?>">Logout <?php echo $_SESSION['username']; ?></a></l1>
         </div>
       </header>
       <!-- Navigation -->
@@ -58,7 +61,6 @@ if(is_post_request()) {
               <l1><a href="announcements.php">Announcements</a></l1>
               <l1><a href="images.php">Images</a></l1>
               <l1><a href="employee_list.php">Employees</a></l1>
-              <l1><a href="<?php echo url_for('../public/logout.php'); ?>">Logout <?php echo $_SESSION['username']; ?></a></l1>
             </ul>
           </nav>
         </aside>

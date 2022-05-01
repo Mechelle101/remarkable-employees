@@ -15,7 +15,8 @@ if(is_post_request()) {
     $new_employee = find_employee_by_username($employee['username']);
     log_in_employee($new_employee);
     $new_id = mysqli_insert_id($db);
-    redirect_to(url_for('staff/show.php?employee_id=' . $new_employee['employee_id']));
+    redirect_to(url_for('staff/index.php'));
+    // redirect_to(url_for('staff/show.php?employee_id=' . $new_employee['employee_id']));
   } else {
     // I added this array list below to reshow the form values that was entered
     // but you have to hit the back button to show what was entered.
@@ -83,16 +84,16 @@ if(is_post_request()) {
           <?php echo display_errors($errors); ?>
           <form action="<?php echo url_for('create_account.php'); ?>" method="post">
             <label for="first_name">First Name</label><br>
-            <input type="text" id="first_name" name="first_name" value=""><br>
+            <input type="text" id="first_name" name="first_name" value="<?php echo $employee['first_name'];  ?>"><br>
             <br>
             <label for="last_name">Last Name</label><br>
-            <input type="text" id="last_name" name="last_name" value=""><br>
+            <input type="text" id="last_name" name="last_name" value="<?php echo $employee['last_name'];  ?>"><br>
             <br>
             <label for="email">Email</label><br>
-            <input type="text" id="email" name="email" value=""><br>
+            <input type="text" id="email" name="email" value="<?php echo $employee['email'];  ?>"><br>
             <br>
             <label for="username">Username</label><br>
-            <input type="text" id="username" name="username" value=""><br>
+            <input type="text" id="username" name="username" value="<?php echo $employee['username'];  ?>"><br>
             <p>Password should be at least 8 characters, 
             <br>include at least one uppercase, lowercase, number, and symbol.</p>
             <label for="password">Password</label><br>

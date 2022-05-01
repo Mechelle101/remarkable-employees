@@ -185,9 +185,7 @@ function create_user_account($employee) {
     return true;
   } else {
     $errors = $result;
-    // var_dump($errors);
     //echo mysqli_error($db);
-
   }
 }
 
@@ -329,8 +327,10 @@ function delete_only_announcement_of_user($id) {
   $sql .= "WHERE announcement_id='" . db_escape($db, (int)$id) . "' ";
   $sql .= "AND employee_id='" . $_SESSION['logged_employee_id'] . "' ";
   $sql .= "LIMIT 1";
+
   $result = mysqli_query($db, $sql);
   return $result;
+  
 }
 
 // THIS IS THE IMAGE QUERIES
@@ -418,43 +418,25 @@ function update_user_profile($employee, $id) {
     return $errors;
   }
  
-  $sql = "UPDATE employee, contact_info SET ";
-  $sql .= "employee.first_name='" . $employee['first_name'] . "', ";
-  $sql .= "employee.last_name='" . $employee['last_name'] . "', ";
-  $sql .= "employee.department_initial='" . $employee['department_initial'] . "', ";
-  $sql .= "employee.email='" . $employee['email'] . "', ";
-  if($username_sent) {
-    //$sql .= "username='" . db_escape($db, $employee['username']) . "',"; 
-     $sql .= "employee.username='" . $employee['username'] . "', ";
-   }
-   if($password_sent) {
-    //$sql .= "hashed_password='" . db_escape($db, $employee['hashed_password']) . "',";
-    $sql .= "employee.password='" . $employee['password'] . "', ";
+  $sql = "UPDATE employee SET ";
+  $sql .= "first_name='" . db_escape($db, $employee['first_name']) . "',";
+  $sql .= "last_name='" . db_escape($db, $employee['last_name']) . "',";
+  $sql .= "phone='" . db_escape($db, $employee['phone']) . "',";
+  $sql .= "department_initial='" . db_escape($db, $employee['department_initial']) . "',";
+  if($password_sent) {
+    $sql .= "hashed_password='" . db_escape($db, $employee['hashed_password']) . "',";
   }
-  // contact_info table
-  $sql .= "contact_info.street_address='" . $employee['street_address'] . "', ";
-  $sql .= "contact_info.city='" . $employee['city'] . "', ";
-  $sql .= "contact_info.state_initial='" . $employee['state_initial'] . "', ";
-  $sql .= "contact_info.zip_code='" . $employee['zip_code'] . "', ";
-  $sql .= "WHERE employee_id='" . $id . "' ";
+  if($username_sent) {
+   $sql .= "username='" . db_escape($db, $employee['username']) . "',"; 
+  }
+  $sql .= "email='" . db_escape($db, $employee['email']) . "' ";
+  $sql .= "WHERE employee_id='" . db_escape($db, (int)$id) . "' ";
   $sql .= "LIMIT 1";
   
   $result = mysqli_query($db, $sql);
   return $result;
 }
 
-function find_all_contact_info_by_id($id) {
-  global $db;
-
-  $sql = "SELECT * FROM employee, contact_info ";
-  $sql .= "WHERE employee.employee_id='" . $id . "' ";
-  $sql .= "AND contact_info.employee_id='" . $id . "' ";
-  $result = mysqli_query($db, $sql);
-  confirm_result_set($result);
-  $subject = mysqli_fetch_assoc($result);
-  mysqli_free_result($result);
-  return $subject;
-}
 
 
 ?>
