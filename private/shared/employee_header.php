@@ -4,8 +4,9 @@
 
   <head>
     <meta charset="utf-8">
-    <title>Remarkable Employee Page</title>
+    <title>Remarkable Employees</title>
     <link href="../stylesheets/public-styles.css" rel="stylesheet">
+    <script src="../../public/js/public.js" defer></script>
     <link rel="shortcut icon" type="image/png" href="../images/favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
@@ -21,6 +22,6 @@
         <div id="user-info">
           <p>Welcome <?php echo $_SESSION['first_name'];?></p>
           <p>You are logged in as - <?php echo $_SESSION['user_level']; ?></p>
-          <l1 id="logout"><a href="<?php echo url_for('../public/logout.php'); ?>">Logout <?php echo $_SESSION['username']; ?></a></l1>
+          <a id="logout" href="<?php echo url_for('../public/logout.php'); ?>">Logout <?php echo $_SESSION['username']; ?></a>
         </div>
       </header>

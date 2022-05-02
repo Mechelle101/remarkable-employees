@@ -71,10 +71,8 @@ if(is_post_request()) {
       <main id="page-content">
         <aside id="navigation">
           <nav id="main-nav">
-            <ul>
-            <l1><a href="<?php echo url_for('index.php'); ?>">Home</a></l1>
-              <l1><a href="<?php echo url_for('create_account.php'); ?>">Create Account</a></l1>
-            </ul>
+            <a href="<?php echo url_for('index.php'); ?>">Home</a>
+            <a href="<?php echo url_for('create_account.php'); ?>">Create Account</a>
           </nav>
         </aside>
 
@@ -82,11 +80,10 @@ if(is_post_request()) {
           <div>
             <h2>Please Login To Access Your Employee Page</h2>
             <p>You must be an employee and have already <a href="create_account.php">created an account</a> to login.</p>
+          </div>
           <hr>
           <div>
-
           <?php echo display_errors($errors); ?>
-
             <form action="login.php" method="post">
               <label for="username">User Name</label><br>
               <input type="text" id="username" name="username" value="<?php echo h($username); ?>"><br>
@@ -99,4 +96,5 @@ if(is_post_request()) {
           </div>
         </article> 
       </main>
+
 <?php include('../private/shared/staff_footer.php'); ?>

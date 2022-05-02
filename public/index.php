@@ -6,7 +6,7 @@
 
   <head>
     <meta charset="utf-8">
-    <title>Remarkable Employees: Public Home</title>
+    <title>Remarkable Employees</title>
     <link href="stylesheets/public-styles.css" rel="stylesheet">
     <link rel="shortcut icon" type="image/png" href="images/favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,10 +25,8 @@
       <main id="page-content">
         <aside id="navigation">
           <nav id="main-nav">
-            <ul>
-              <l1><a href="create_account.php">Create Account</a></l1>
-              <l1><a href="login.php">Login</a></l1>
-            </ul>
+            <a href="create_account.php">Create Account</a>
+            <a href="login.php">Login</a>
           </nav>
         </aside>
 

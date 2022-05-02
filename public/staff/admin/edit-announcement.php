@@ -33,31 +33,31 @@ include('../../../private/shared/admin_header.php');
       <main id="page-content">
         <aside id="navigation">
           <nav id="main-nav">
-            <ul>
-              <l1><a href="<?php echo url_for('/staff/admin/index.php'); ?>"><?php echo $_SESSION['username']; ?> Home</a></l1>
-              <l1><a href="announcements.php">Announcements</a></l1>
-              <l1><a href="images.php">Images</a></l1>
-              <l1><a href="employee_list.php">Employees</a></l1>
-            </ul>
+            <a href="<?php echo url_for('/staff/admin/index.php'); ?>"><?php echo $_SESSION['username']; ?> Home</a>
+            <a href="announcements.php">Announcements</a>
+            <a href="images.php">Images</a>
+            <a href="employee_list.php">Employees</a>
           </nav>
         </aside>
         <!-- Main body -->
         <article id="description">
           <div>
             <?php echo display_session_message(); ?>
-            <h1>You Are Unable to Edit if You Are Not The Author</h1>
+            <h2>You Are Unable to Edit if You Are Not The Author</h2>
+            <div id="add-employee">
+              <a href="<?php echo url_for('staff/admin/announcements.php'); ?>">Back to Announcements</a>
+            </div>
           </div>
           <hr>
           <div>
-            <?php //echo display_errors($errors); ?>
             <fieldset id="fieldset-form">
             <legend>Author: <?php echo $announcement_employee['first_name'] ?></legend> 
-            <form action="<?php echo url_for('/staff/admin/edit-announcement.php?announcement_id=' . h(u($id))); ?>" method="post">
-              <label for="announcement">Edit Announcement</label>
-              <input type='hidden' name="announcement" value=""><br>
-              <textarea id="announcement" name="announcement"  rows="5" cols="30"><?php echo h($announcement['announcement']); ?>" </textarea><br>
-              <button type='submit' name='submit'>Edit</button>
-            </form>
+              <form action="<?php echo url_for('/staff/admin/edit-announcement.php?announcement_id=' . h(u($id))); ?>" method="post">
+                <label for="announcement">Edit Announcement</label>
+                <input type='hidden' name="announcement" value=""><br>
+                <textarea id="announcement" name="announcement"  rows="5" cols="30"><?php echo h($announcement['announcement']); ?>" </textarea><br>
+                <button type='submit' name='submit'>Edit</button>
+              </form>
             </fieldset>
           </div>
         </article> 

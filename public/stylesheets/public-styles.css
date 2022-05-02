@@ -46,7 +46,8 @@ header {
   text-align: center; 
 }
 
-#add-employee a {
+#add-employee a,
+.add-employee a {
   box-shadow: 0 0 5px #724a4a;
   border: 2px solid #724a4a;
   border-radius: 10px;
@@ -67,7 +68,7 @@ header {
   padding: 4px 8px;
 }
 
-#user-info #logout a {
+#user-info #logout {
   background-color: #724a4a;
   box-shadow: 0 0 5px #fee4e4;
   border: 1px solid #fee4e4;
@@ -78,7 +79,7 @@ header {
   padding: 4px 8px;
 }
 
-#user-info #logout a:hover {
+#user-info #logout:hover {
   background-color: #fee4e4;
   color: #000;
 }
@@ -103,7 +104,7 @@ img {
   border-radius: 25px;
   padding: 10px;
   max-width: 100%;
-  max-height: auto;
+  height: auto;
 }
 
 #images img.zoomed {
@@ -113,7 +114,7 @@ img {
 #image-display {
   margin-top: 20px;
   max-width: 100%;
-  max-height: auto;
+  height: auto;
 }
 
 #one-image {
@@ -217,7 +218,7 @@ footer a {
     margin: 5px;
   }
 
-  #images fieldset #image1 {
+  #images fieldset .image1 {
     grid-column: 1/2;
     grid-row: 1/2;
     justify-self: center;

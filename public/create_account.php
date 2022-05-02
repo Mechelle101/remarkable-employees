@@ -44,7 +44,7 @@ if(is_post_request()) {
 
   <head>
     <meta charset="utf-8">
-    <title>Remarkable Employees: Employee Home Page</title>
+    <title>Remarkable Employees: Create Account</title>
     <link href="stylesheets/public-styles.css" rel="stylesheet">
     <link rel="shortcut icon" type="image/png" href="images/favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -63,17 +63,15 @@ if(is_post_request()) {
       <main id="page-content">
         <aside id="navigation">
           <nav id="main-nav">
-            <ul>
-              <l1><a href="index.php">Home</a></l1>
-              <l1><a href="login.php">Login</a></l1>
-            </ul>
+             <a href="index.php">Home</a>
+             <a href="login.php">Login</a>
           </nav>
         </aside>
 
         <article id="description">
           <div>
             <h2>Employees May Create An Account</h2>
-            <p>You may <a href="login.php">login</a> if you have already created an account </p>
+            <p>You must be an employee and have already created an account <a href="create_account.php">to login.</a></p>
           </div>
           <hr>
           <div>

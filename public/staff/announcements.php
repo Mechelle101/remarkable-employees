@@ -35,17 +35,16 @@ include('../../private/shared/employee_header.php');
       <main id="page-content">
         <aside id="navigation">
           <nav id="main-nav">
-            <ul>
-              <l1><a href="<?php echo url_for( '/staff/index.php'); ?>"><?php echo $_SESSION['username']; ?> Home</a></l1>
-              <l1><a href="announcements.php">Announcements</a></l1>
-              <l1><a href="images.php">Images</a></l1>
-              <l1><a href="employee_list.php">Employees</a></l1>
-            </ul>
+            <a href="<?php echo url_for( '/staff/index.php'); ?>"><?php echo $_SESSION['username']; ?> Home</a>
+            <a href="announcements.php">Announcements</a>
+            <a href="images.php">Images</a>
+            <a href="employee_list.php">Employees</a>
           </nav>
         </aside>
         <!-- Main body -->
         <article id="description">
           <div id="announcement-form">
+          <h2>A Place Where You Can Share Anything You Like</h2>
             <form action="<?php echo url_for('/staff/announcements.php'); ?>" method="post">
               <input type='hidden' id="date" name='date' value="<?php  ?>"><br>
               <label for="announcement">Post Announcement Here</label>
@@ -57,7 +56,7 @@ include('../../private/shared/employee_header.php');
             <!-- This re-displays the message and resubmits the announcement each time you refresh the page -->
             <?php echo display_session_message(); ?>
             <div id="display-announcement">
-              <h1>Announcements &amp; Reminders</h1>
+            <h3>Communications From Others</h3>
               <fieldset>  
               <legend>Forum Posts</legend> 
               <?php
@@ -67,9 +66,9 @@ include('../../private/shared/employee_header.php');
                 <div>
                   <p><?= $announcements['first_name'] . " " . $announcements['last_name'] . "<br>" . date_format(date_create($announcements['date']), "g:ia \o\\n l F jS\, Y"); ?></p>
                   <p><?= $announcements['announcement']; ?></p>
-                  <div id="add-employee">
-                    <a class="action" href="<?php echo url_for('/staff/delete-announcement.php?announcement_id='. h(u($announcements['announcement_id']))); ?>">Delete</a>
-                    <a class="action" href="<?php echo url_for('/staff/edit-announcement.php?announcement_id='. h(u($announcements['announcement_id']))); ?>">Edit</a>
+                  <div class="add-employee">
+                    <a href="<?php echo url_for('/staff/delete-announcement.php?announcement_id='. h(u($announcements['announcement_id']))); ?>">Delete</a>
+                    <a href="<?php echo url_for('/staff/edit-announcement.php?announcement_id='. h(u($announcements['announcement_id']))); ?>">Edit</a>
                   </div>
                 </div>
                 <hr>

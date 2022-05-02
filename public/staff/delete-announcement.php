@@ -29,21 +29,19 @@ include('../../private/shared/employee_header.php');
       <main id="page-content">
         <aside id="navigation">
           <nav id="main-nav">
-            <ul>
-              <l1><a href="<?php echo url_for( '/staff/index.php'); ?>"><?php echo $_SESSION['username']; ?> Home</a></l1>
-              <l1><a href="announcements.php">Announcements</a></l1>
-              <l1><a href="images.php">Images</a></l1>
-              <l1><a href="employee_list.php">Employees</a></l1>
-            </ul>
+            <a href="<?php echo url_for( '/staff/index.php'); ?>"><?php echo $_SESSION['username']; ?> Home</a>
+            <a href="announcements.php">Announcements</a>
+            <a href="images.php">Images</a>
+            <a href="employee_list.php">Employees</a>
           </nav>
         </aside>
         <!-- Main Body -->
         <article id="description">
           <div>
             <?php echo display_session_message(); ?>
-            <h1>Delete Announcement</h1>
-            <div id="add-employee" id="action">
-              <a class="action" href="<?php echo url_for('staff/announcements.php'); ?>">Back to Announcements</a>
+            <h2>Delete Announcement</h2>
+            <div id="add-employee">
+              <a href="<?php echo url_for('staff/announcements.php'); ?>">Back to Announcements</a>
             </div>
           </div>
           <div id="delete">

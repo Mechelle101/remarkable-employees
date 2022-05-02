@@ -405,6 +405,19 @@ function delete_only_image_of_user($id) {
   return $result;
 }
 
+function update_only_image_of_user($image, $id) {
+  global $db;
+ 
+  $sql = "UPDATE image SET ";
+  $sql .= "image.caption='" . $image['caption'] . "' ";
+  $sql .= "WHERE image_id='" . $id . "' ";
+  $sql .= "AND image.employee_id='" . $_SESSION['logged_employee_id'] . "' ";
+  $sql .= "LIMIT 1";
+  
+  $result = mysqli_query($db, $sql);
+  return $result;
+}
+
 // UPDATING USER PROFILE
 function update_user_profile($employee, $id) {
   global $db;

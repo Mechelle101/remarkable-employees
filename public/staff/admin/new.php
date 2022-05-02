@@ -32,22 +32,20 @@ include('../../../private/shared/admin_header.php');
       <main id="page-content">
         <aside id="navigation">
           <nav id="main-nav">
-            <ul>
-              <l1><a href="<?php echo url_for( '/staff/admin/index.php'); ?>"><?php echo $_SESSION['username']; ?> Home</a></l1>
-              <l1><a href="announcements.php">Announcements</a></l1>
-              <l1><a href="images.php">Images</a></l1>
-              <l1><a href="employee_list.php">Employees</a></l1>
-            </ul>
+            <a href="<?php echo url_for( '/staff/admin/index.php'); ?>"><?php echo $_SESSION['username']; ?> Home</a>
+            <a href="announcements.php">Announcements</a>
+            <a href="images.php">Images</a>
+            <a href="employee_list.php">Employees</a>
           </nav>
         </aside>
         <!-- Main body -->
         <article id="description">
           <div>
             <?php echo display_session_message(); ?>
-            <h1>Create A New Account</h1>
+            <h2>Create A New Account</h2>
             <p>Admin page for adding a new employee</p>
-            <div id="add-employee" id="action">
-              <a class="action" href="<?php echo url_for('staff/admin/employee_list.php'); ?>">Back to List</a>
+            <div id="add-employee">
+              <a href="<?php echo url_for('staff/admin/employee_list.php'); ?>">Back to List</a>
             </div>
           </div>
           <hr>

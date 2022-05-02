@@ -57,18 +57,16 @@ include('../../../private/shared/admin_header.php');
       <main id="page-content">
         <aside id="navigation">
           <nav id="main-nav">
-            <ul>
-              <l1><a href="index.php"><?php echo $_SESSION['username']; ?> Home</a></l1>
-              <l1><a href="announcements.php">Announcements</a></l1>
-              <l1><a href="images.php">Images</a></l1>
-              <l1><a href="employee_list.php">Employees</a></l1>
-            </ul>
+            <a href="index.php"><?php echo $_SESSION['username']; ?> Home</a>
+            <a href="announcements.php">Announcements</a>
+            <a href="images.php">Images</a>
+            <a href="employee_list.php">Employees</a>
           </nav>
         </aside>
        <!-- Main body -->
         <article id="description">
           <div>
-            <h1>Great Place For Sharing Memories</h1>
+            <h2>Great Place For Sharing Memories</h2>
             <?php 
             // This is not displaying my confirmation message
             echo display_session_message(); 
@@ -88,10 +86,9 @@ include('../../../private/shared/admin_header.php');
                 <input type="submit" name="submit" value="upload">
               </form>
             </fieldset>
-
           </div>
           <hr>
-          <h2>Employee Image Display</h2>
+          <h3>Employee Image Display</h3>
           <div id="images">
             <?php
               $image_set = find_all_images_and_employee_names();
@@ -101,9 +98,9 @@ include('../../../private/shared/admin_header.php');
                 <!-- PUT THIS ON A GRID TO EVEN THE BUTTONS OUT -->
                 <fieldset>
                 <legend><?php echo $images['caption']; ?></legend>
-                  <img id="image1" src="../../upload-images/<?= $images['file_name'] ?>">
-                  <div  id="add-employee">
-                    <a class="action" href="<?php echo url_for('/staff/admin/show-image-info.php?image_id=' . h(u($images['image_id']))); ?>">View Image Information</a>
+                  <img class="image1" src="../../upload-images/<?= $images['file_name'] ?>" alt="<?php echo h($images['caption']); ?>">
+                  <div  class="add-employee">
+                    <a href="<?php echo url_for('/staff/admin/show-image-info.php?image_id=' . h(u($images['image_id']))); ?>">View Image Information</a>
                   </div>
                 </fieldset>
               <?php }
