@@ -8,6 +8,7 @@
     $_SESSION['last_login'] = time();
     $_SESSION['username'] = $employee['username'];
     $_SESSION['user_level'] = $employee['user_level'];
+    $_SESSION['first_name'] = $employee['first_name'];
     return true;
   }
 
@@ -16,6 +17,7 @@
     unset($_SESSION['last_login']);
     unset($_SESSION['username']);
     unset($_SESSION['user_level']);
+    unset($_SESSION['first_name']);
     // session_destroy(); //THIS DESTROYS THE WHOLE SESSION, OPTIONAL
     return true;
   }
@@ -36,7 +38,6 @@ function is_logged_in() {
 // require a valid login before granting access to the page.
 function require_login() {
   if(!is_logged_in()) {
-
     redirect_to(url_for('../public/login.php'));
   } else {
     // Do nothing, let the rest of the page proceed

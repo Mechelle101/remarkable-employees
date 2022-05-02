@@ -18,7 +18,7 @@
         <a href="index.php"><img src="images/ppl-logo.png" alt="circle logo" width="100" height="100"></a>
         <div id="header-content">
           <h1>Remarkable Employees</h1>
-          <h4>Where We Come Together As A Team</h4>
+          <p>Where We Come Together As A Team</p>
         </div>
       </header>
 
@@ -34,28 +34,20 @@
 
         <article id="description">
           <div>
-            <p>This page is intended for employees exclusively. You may create an account if you are employed with the company.</p>
+            <p>This page is intended for employees exclusively. You may create an account if you are employed with our company.</p>
           </div>
           <hr>
           <div>
-            <p>Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.</p>
-            <p>Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints for offshoring.</p>
+            <h1>Statement on Diversity, Equity & Inclusion</h1>
+            <p>Our company is committed to fostering a company culture where everyone is encouraged to give their best and realize their full potential regardless of race, sex, color, nationality or national origin, religion, age, disability, marital status, sexual orientation, or gender identification, or political affiliation.</p>
+            <p>We believe in equality, justice, and putting people first. We believe each person deserves to be treated with dignity and respect for both our shared humanity and the distinct qualities that make us unique. It is from those unique qualities that we draw strength as a company and as a society.</p>
+            <p>Our employees are the most valuable asset we have. The collective sum of the individual differences, life experiences, knowledge, inventiveness, innovation, self-expression, unique capabilities, and talent that our employees invest in their work represents a significant part of not only our culture but our reputation and company's achievement as well.</p>
+            <p>Our company's practices and policies on recruitment and selection, compensation and benefits, professional development and training, promotions, transfers and the ongoing development of a work environment are built on the premise of dignity and respect for all. All of our employees have a responsibility to treat others with dignity and respect at all times. All employees are expected to exhibit conduct that reflects inclusion during work, at work functions on or off the worksite, and all other company-sponsored events.</p>
+            <p>Racism and Discrimination have never had a place at This company. We stand resolute in our commitment to our staff, Guests, and the communities in which we operate to deconstruct barriers to a culture of racial equality in our company, and we will hold all employees accountable to a zero-tolerance for racism and discrimination in all its forms.</p>
+            <p>All employees are also required to attend and complete annual Diversity, Equity, and Inclusion training to enhance their knowledge to fulfill this responsibility. Any staff member found to have exhibited any inappropriate conduct or behavior against others may be subject to disciplinary action up to and including separation of employment.</p>
+            <p>Employees who believe they have been subjected to any kind of treatment that conflicts with the company's Diversity, Equity, and Inclusion and policies, practices, or initiatives should report their concerns to Human Resources immediately.</p>
           </div>
         </article> 
       </main>
 
-      <!-- PAGE FOOTER -->
-      <footer id="footer">
-        <div id="my-info">
-          <h4>Created By</h4>
-          &copy; <?php echo date('Y'); ?> Mechelle &#9774; Presnell &hearts;
-        </div>
-        <div id="chamber">
-          <h4>Chamber of Commerce Links</h4> 
-          <p><a href="https://www.ashevillechamber.org/news-events/events/wnc-career-expo/?gclid=EAIaIQobChMI--vY9Jfk9gIVBLLICh1_2gFFEAAYASAAEgJtifD_BwE" target="_blank">Asheville Chamber of Commerce</a></p>
-          <p><a href="https://www.uschamber.com/" target="_blank">US Chamber of Commerce</a></p>
-        </div>
-      </footer>
-    </div>
-  </body>
-</html>
+<?php include('../private/shared/staff_footer.php'); ?>

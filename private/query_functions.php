@@ -48,7 +48,6 @@ function find_employee_by_username($username) {
 
 // This function was changed to leave off the username and pw validation
 function validate_updated_employee($employee) {
-
   $errors = [];
   
   if(is_blank($employee['first_name'])) {
@@ -185,13 +184,14 @@ function create_user_account($employee) {
     return true;
   } else {
     $errors = $result;
-    //echo mysqli_error($db);
   }
 }
 
 // ADMIN UPDATES AN EMPLOYEE
 function update_employee($employee, $id) {
   global $db;
+
+  //$errors = validate_updated_employee($employee);
 
   $password_sent = !is_blank($employee['password']);
   $username_sent = !is_blank($employee['username']);
@@ -216,12 +216,8 @@ function update_employee($employee, $id) {
   $sql .= "LIMIT 1";
   
   $result = mysqli_query($db, $sql);
-  if($result === true) {
-    $_SESSION['message'] = 'The employee was updated successfully.';
-    return true;
-  } else {
-    echo mysqli_error($db);
-  }
+  return $result;
+
 }
 
 // ADMIN DELETING AN EMPLOYEE ACCOUNT
@@ -252,6 +248,8 @@ function find_announcement_and_employee_name() {
   $sql .= "employee.employee_id, employee.first_name, ";
   $sql .= "employee.last_name FROM announcement ";
   $sql .= "JOIN employee USING(employee_id)";
+  $sql .= "ORDER BY announcement.date DESC ";
+
   $result = mysqli_query($db, $sql);
   confirm_result_set($result);
   return $result;
@@ -260,7 +258,7 @@ function find_announcement_and_employee_name() {
 function find_announcement_by_id($id) {
   global $db;
   $sql = "SELECT * FROM announcement ";
-  $sql .= "WHERE announcement_id='" . db_escape($db, (int)$id) . "'";
+  $sql .= "WHERE announcement_id='" . db_escape($db, (int)$id) . "' ";
 
   $result = mysqli_query($db, $sql);
   confirm_result_set($result);
@@ -359,6 +357,7 @@ function find_all_images_and_employee_names() {
     $sql .= "employee.employee_id, employee.first_name, ";
     $sql .= "employee.last_name FROM image ";
     $sql .= "JOIN employee USING(employee_id)";
+    $sql .= "ORDER BY image.upload_date DESC ";
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
     return $result;
@@ -377,7 +376,7 @@ function find_all_images_and_employee_by_image_id($id) {
   confirm_result_set($result);
   $image = mysqli_fetch_assoc($result);
   mysqli_free_result($result);
-  return $image; // return the assoc. array
+  return $image; 
 }
 
 function insert_image($new_image_file_name, $image) {

@@ -64,7 +64,7 @@ if(is_post_request()) {
         <a href="index.php"><img src="images/ppl-logo.png" alt="circle logo" width="100" height="100"></a>
         <div id="header-content">
           <h1>Remarkable Employees</h1>
-          <h4>Where We Come Together As A Team</h4>
+          <p>Where We Come Together As A Team</p>
         </div>
       </header>
 
@@ -99,17 +99,4 @@ if(is_post_request()) {
           </div>
         </article> 
       </main>
-      <footer id="footer">
-        <div id="my-info">
-          <h4>Created By</h4>
-          &copy; <?php echo date('Y'); ?> Mechelle &#9774; Presnell &hearts;
-        </div>
-        <div id="chamber">
-          <h4>Chamber of Commerce Links</h4>
-          <p><a href="https://www.ashevillechamber.org/news-events/events/wnc-career-expo/?gclid=EAIaIQobChMI--vY9Jfk9gIVBLLICh1_2gFFEAAYASAAEgJtifD_BwE" target="_blank">Asheville Chamber of Commerce</a></p>
-          <p><a href="https://www.uschamber.com/" target="_blank">US Chamber of Commerce</a></p>
-        </div>
-      </footer>
-    </div>
-  </body>
-</html>
+<?php include('../private/shared/staff_footer.php'); ?>

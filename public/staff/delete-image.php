@@ -21,34 +21,9 @@ if(is_post_request()) {
     exit;
   }
 }
-
+include('../../private/shared/employee_header.php');
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-
-  <head>
-    <meta charset="utf-8">
-    <title>Delete Image</title>
-    <link href="../stylesheets/public-styles.css" rel="stylesheet">
-    <link rel="shortcut icon" type="image/png" href="../images/favicon.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  </head>
-
-  <body>
-    <div id="main-content">
-      <header>
-        <a href="<?php echo url_for( 'staff/index.php'); ?>"><img src="../images/ppl-logo.png" alt="circle logo" width="100" height="100"></a>
-        <div id="header-content">
-          <h1>Remarkable Employees</h1>
-          <h4>Where We Come Together As A Team</h4>
-        </div>
-        <div id="user-info">
-          <p>Welcome <?php echo $_SESSION['username']; ?></p>
-          <p>You are logged in as - <?php echo $_SESSION['user_level']; ?></p>
-          <l1 id="logout"><a href="<?php echo url_for('../public/logout.php'); ?>">Logout <?php echo $_SESSION['username']; ?></a></l1>
-        </div>
-      </header>
       <!-- Navigation -->
       <main id="page-content">
         <aside id="navigation">
@@ -72,7 +47,7 @@ if(is_post_request()) {
           </div>
           <div id="delete">
             <div id="image-display"> 
-              <h4>YOU MAY ONLY DELETE IMAGES YOU UPLOADED</h4>
+              <strong>YOU MAY ONLY DELETE IMAGES YOU UPLOADED</strong>
               <p>IMAGE CAPTION: <?php echo h($image['caption']); ?></p>
               <p>UPLOADED BY: <?php echo h($image['first_name']) . " " .  h($image['last_name']); ?></p>
               <form action="<?php echo url_for('/staff/delete-image.php?image_id=' . h(u($image['image_id']))); ?>" method="POST">
@@ -83,18 +58,4 @@ if(is_post_request()) {
           </div>
         </article> 
       </main>
-      <footer id="footer">
-        <div id="my-info">
-          <h4>Created By</h4>
-          &copy; <?php echo date('Y'); ?> Mechelle &#9774; Presnell &hearts;
-        </div>
-        <div id="chamber">
-          <h4>Chamber of Commerce Links</h4>
-          <p><a href="https://www.ashevillechamber.org/news-events/events/wnc-career-expo/?gclid=EAIaIQobChMI--vY9Jfk9gIVBLLICh1_2gFFEAAYASAAEgJtifD_BwE" target="_blank">Asheville Chamber of Commerce</a></p>
-          <p><a href="https://www.uschamber.com/" target="_blank">US Chamber of Commerce</a></p>
-        </div>
-      </footer>
-    </div>
-  </body>
-</html>
-
+<?php include('../../private/shared/staff_footer.php'); ?>

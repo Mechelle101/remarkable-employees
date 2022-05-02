@@ -16,10 +16,7 @@ if(is_post_request()) {
     log_in_employee($new_employee);
     $new_id = mysqli_insert_id($db);
     redirect_to(url_for('staff/index.php'));
-    // redirect_to(url_for('staff/show.php?employee_id=' . $new_employee['employee_id']));
   } else {
-    // I added this array list below to reshow the form values that was entered
-    // but you have to hit the back button to show what was entered.
     $employee = [];
     $employee['first_name'] = $_POST['first_name'] ?? '';
     $employee['last_name'] = $_POST['last_name'] ?? '';
@@ -59,7 +56,7 @@ if(is_post_request()) {
         <a href="<?php echo url_for('index.php'); ?>"><img src="images/ppl-logo.png" alt="circle logo" width="100" height="100"></a>
         <div id="header-content">
           <h1>Remarkable Employees</h1>
-          <h4>Where We Come Together As A Team</h4>
+          <p>Where We Come Together As A Team</p>
         </div>
       </header>
 
@@ -67,7 +64,7 @@ if(is_post_request()) {
         <aside id="navigation">
           <nav id="main-nav">
             <ul>
-              <l1><a href="<?php echo url_for('index.php'); ?>">Home</a></l1>
+              <l1><a href="index.php">Home</a></l1>
               <l1><a href="login.php">Login</a></l1>
             </ul>
           </nav>
@@ -75,13 +72,14 @@ if(is_post_request()) {
 
         <article id="description">
           <div>
-            <h2>Create an Account</h2>
-            <p>You must be an employee to create an account.</p>
-            <p>If you have an account please login.</p>
+            <h2>Employees May Create An Account</h2>
+            <p>You may <a href="login.php">login</a> if you have already created an account </p>
           </div>
           <hr>
           <div>
           <?php echo display_errors($errors); ?>
+          <fieldset id="fieldset-form">
+          <legend>Create an Account</legend>
           <form action="<?php echo url_for('create_account.php'); ?>" method="post">
             <label for="first_name">First Name</label><br>
             <input type="text" id="first_name" name="first_name" value="<?php echo $employee['first_name'];  ?>"><br>
@@ -99,27 +97,15 @@ if(is_post_request()) {
             <label for="password">Password</label><br>
             <input type="password" id="password" name="password" value=""><br>
             <br>
-            <label for="password">Confirm Password</label><br>
-            <input type="password" id="password" name="confirm_password" value=""><br>
+            <label for="confirm_password">Confirm Password</label><br>
+            <input type="password" id="confirm_password" name="confirm_password" value=""><br>
             <br>
             <div id="operations">
               <input type="submit" name="submit" value="Create Account">
             </div>
           </form>
+          </fieldset>
           </div>
         </article> 
       </main>
-      <footer id="footer">
-        <div id="my-info">
-          <h4>Created By</h4>
-          &copy; <?php echo date('Y'); ?> Mechelle &#9774; Presnell &hearts;
-        </div>
-        <div id="chamber">
-          <h4>Chamber of Commerce Links</h4>
-          <p><a href="https://www.ashevillechamber.org/news-events/events/wnc-career-expo/?gclid=EAIaIQobChMI--vY9Jfk9gIVBLLICh1_2gFFEAAYASAAEgJtifD_BwE" target="_blank">Asheville Chamber of Commerce</a></p>
-          <p><a href="https://www.uschamber.com/" target="_blank">US Chamber of Commerce</a></p>
-        </div>
-      </footer>
-    </div>
-  </body>
-</html>
+<?php include('../private/shared/staff_footer.php'); ?>
