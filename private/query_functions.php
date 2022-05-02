@@ -6,6 +6,11 @@
 //with information about that operation.
 use LDAP\Result;
 
+/**
+ * Method find_all_employees
+ *
+ * @return void
+ */
 function find_all_employees() {
   global $db;
   $sql = "SELECT * FROM employee ";
@@ -14,7 +19,11 @@ function find_all_employees() {
   return $result;
 }
 
-// This is to query ONLY employees not admins
+/**
+ * Method find_only_employees
+ *
+ * @return void
+ */
 function find_only_employees() {
   global $db;
   $sql = "SELECT * FROM employee ";
@@ -24,6 +33,13 @@ function find_only_employees() {
   return $result;
 }
 
+/**
+ * Method find_employee_by_id
+ *
+ * @param $id finds the employee by their id
+ *
+ * @return void
+ */
 function find_employee_by_id($id) {
   global $db;
   $sql = "SELECT * FROM employee ";
@@ -35,6 +51,13 @@ function find_employee_by_id($id) {
   return $subject;
 }
 
+/**
+ * Method find_employee_by_username
+ *
+ * @param $username finds the employee by their username
+ *
+ * @return void
+ */
 function find_employee_by_username($username) {
   global $db;
   $sql = "SELECT * FROM employee ";
@@ -46,7 +69,14 @@ function find_employee_by_username($username) {
   return $employee;
 }
 
-// This function was changed to leave off the username and pw validation
+
+/**
+ * Method validate_updated_employee
+ *
+ * @param $employee validates the employee information through their array of information
+ *
+ * @return void
+ */
 function validate_updated_employee($employee) {
   $errors = [];
   
@@ -69,7 +99,15 @@ function validate_updated_employee($employee) {
   return $errors;
 }
 
-// This is to validate the inserted employee
+
+/**
+ * Method validate_employee
+ *
+ * @param $employee validates the employee information through their array of information
+ * @param $options=[] this is the errors in array format
+ *
+ * @return void
+ */
 function validate_employee($employee, $options=[]) {
   $errors = [];
   $password_required = $options['password_required'] ?? true;
@@ -125,7 +163,14 @@ function validate_employee($employee, $options=[]) {
   return $errors;
 }
 
-// ADMIN ADDS AN EMPLOYEE
+
+/**
+ * Method insert_employee
+ *
+ * @param $employee array of employee information
+ *
+ * @return void
+ */
 function insert_employee($employee) {
   global $db;
 
@@ -160,7 +205,14 @@ function insert_employee($employee) {
   }
 }
 
-// CREATE A USER ACCOUNT
+
+/**
+ * Method create_user_account
+ *
+ * @param $employee array of employee information
+ *
+ * @return void
+ */
 function create_user_account($employee) {
   global $db;
   $errors = validate_employee($employee);
@@ -187,7 +239,15 @@ function create_user_account($employee) {
   }
 }
 
-// ADMIN UPDATES AN EMPLOYEE
+
+/**
+ * Method update_employee
+ *
+ * @param $employee array of employee information
+ * @param $id updating employee based on the given id
+ *
+ * @return void
+ */
 function update_employee($employee, $id) {
   global $db;
 
@@ -220,7 +280,14 @@ function update_employee($employee, $id) {
 
 }
 
-// ADMIN DELETING AN EMPLOYEE ACCOUNT
+
+/**
+ * Method delete_employee
+ *
+ * @param $id admin deletes an employee based on given id
+ *
+ * @return void
+ */
 function delete_employee($id) {
   global $db;
 
@@ -289,7 +356,13 @@ function insert_announcement($announcement) {
   }
 }
 
-// THIS IS FOR FINDING THE ANNOUNCEMENT POSTED BY CURRENT USER
+/**
+ * Method find_all_announcements_and_employee_by_announcement_id
+ *
+ * @param $id the announcement id pasted by current user
+ *
+ * @return void
+ */
 function find_all_announcements_and_employee_by_announcement_id($id) {
   global $db;
   $sql = "SELECT announcement.announcement_id, announcement.announcement, announcement.date, ";
@@ -305,12 +378,20 @@ function find_all_announcements_and_employee_by_announcement_id($id) {
   return $image; 
 }
 
+/**
+ * Method update_only_announcement_of_user
+ *
+ * @param $announcement announcement body
+ * @param $id $id announcement id
+ *
+ * @return void
+ */
 function update_only_announcement_of_user($announcement, $id) {
   global $db;
  
   $sql = "UPDATE announcement SET ";
   $sql .= "announcement.announcement='" . $announcement['announcement'] . "' ";
-  $sql .= "WHERE announcement_id='" . $id . "' ";
+  $sql .= "WHERE announcement_id='" . db_escape($db, (int)$id) . "' ";
   $sql .= "AND announcement.employee_id='" . $_SESSION['logged_employee_id'] . "' ";
   $sql .= "LIMIT 1";
   
@@ -319,6 +400,13 @@ function update_only_announcement_of_user($announcement, $id) {
 }
 
 // THIS IS FOR DELETING ANNOUNCEMENTS POSTED BY CURRENT USER
+/**
+ * Method delete_only_announcement_of_user
+ *
+ * @param $id announcement id
+ *
+ * @return void
+ */
 function delete_only_announcement_of_user($id) {
   global $db;
   $sql = "DELETE FROM announcement ";
@@ -331,7 +419,14 @@ function delete_only_announcement_of_user($id) {
   
 }
 
-// THIS IS THE IMAGE QUERIES
+
+/**
+ * Method find_image_by_id
+ *
+ * @param $id image id
+ *
+ * @return void
+ */
 function find_image_by_id($id) {
   global $db;
   $sql = "SELECT * FROM image ";
@@ -343,6 +438,11 @@ function find_image_by_id($id) {
   return $image; // return the assoc. array
 }
 
+/**
+ * Method find_all_images
+ *
+ * @return void
+ */
 function find_all_images() {
   global $db;
   $sql = "SELECT * FROM image ";
@@ -351,19 +451,31 @@ function find_all_images() {
   return $result;
 }
 
+/**
+ * Method find_all_images_and_employee_names
+ *
+ * @return void
+ */
 function find_all_images_and_employee_names() {
-    global $db;
-    $sql = "SELECT image.*, ";
-    $sql .= "employee.employee_id, employee.first_name, ";
-    $sql .= "employee.last_name FROM image ";
-    $sql .= "JOIN employee USING(employee_id)";
-    $sql .= "ORDER BY image.upload_date DESC ";
-    $result = mysqli_query($db, $sql);
-    confirm_result_set($result);
-    return $result;
+  global $db;
+  $sql = "SELECT image.*, ";
+  $sql .= "employee.employee_id, employee.first_name, ";
+  $sql .= "employee.last_name FROM image ";
+  $sql .= "JOIN employee USING(employee_id)";
+  $sql .= "ORDER BY image.upload_date DESC ";
+  $result = mysqli_query($db, $sql);
+  confirm_result_set($result);
+  return $result;
 }
 
-// FINDING ALL IMAGES AND EMPLOYEE WHO UPLOADED
+
+/**
+ * Method find_all_images_and_employee_by_image_id
+ *
+ * @param $id image id
+ *
+ * @return void
+ */
 function find_all_images_and_employee_by_image_id($id) {
   global $db;
   $sql = "SELECT image.image_id, image.caption, image.file_name, image.upload_date, ";
@@ -379,6 +491,14 @@ function find_all_images_and_employee_by_image_id($id) {
   return $image; 
 }
 
+/**
+ * Method insert_image
+ *
+ * @param $new_image_file_name generated image file name
+ * @param $image image array
+ *
+ * @return void
+ */
 function insert_image($new_image_file_name, $image) {
   global $db;
   $sql = "INSERT INTO image ";
@@ -394,7 +514,14 @@ function insert_image($new_image_file_name, $image) {
   return $result;
 }
 
-// DELETE IMAGES BASED ON IMAGE ID AND LOGGED IN USER
+
+/**
+ * Method delete_only_image_of_user
+ *
+ * @param $id deleting the image id based on the logged in user id
+ *
+ * @return void
+ */
 function delete_only_image_of_user($id) {
   global $db;
   $sql = "DELETE FROM image ";
@@ -405,12 +532,20 @@ function delete_only_image_of_user($id) {
   return $result;
 }
 
+/**
+ * Method update_only_image_of_user
+ *
+ * @param $image image array information
+ * @param $id image id associated with logged in user id
+ *
+ * @return void
+ */
 function update_only_image_of_user($image, $id) {
   global $db;
  
   $sql = "UPDATE image SET ";
   $sql .= "image.caption='" . $image['caption'] . "' ";
-  $sql .= "WHERE image_id='" . $id . "' ";
+  $sql .= "WHERE image_id='" . db_escape($db, (int)$id) . "' ";
   $sql .= "AND image.employee_id='" . $_SESSION['logged_employee_id'] . "' ";
   $sql .= "LIMIT 1";
   
@@ -418,7 +553,15 @@ function update_only_image_of_user($image, $id) {
   return $result;
 }
 
-// UPDATING USER PROFILE
+
+/**
+ * Method update_user_profile
+ *
+ * @param $employee array of logged in employee information
+ * @param $id logged in employee id
+ *
+ * @return void
+ */
 function update_user_profile($employee, $id) {
   global $db;
 

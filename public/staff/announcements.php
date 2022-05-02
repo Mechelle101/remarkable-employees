@@ -53,7 +53,6 @@ include('../../private/shared/employee_header.php');
               <button type='submit' name='submit'>Add to Forum</button>
             </form>
             <hr>
-            <!-- This re-displays the message and resubmits the announcement each time you refresh the page -->
             <?php echo display_session_message(); ?>
             <div id="display-announcement">
             <h3>Communications From Others</h3>

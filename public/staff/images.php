@@ -97,10 +97,10 @@ include('../../private/shared/employee_header.php');
                 while($images = mysqli_fetch_assoc($image_set)) { ?>
                 <fieldset>
                 <legend><?php echo $images['caption']; ?></legend>
-                    <img class="image1" src="../upload-images/<?= $images['file_name'] ?>" alt="<?php echo h($images['caption']); ?>">
-                    <div  class="add-employee">
-                      <a href="<?php echo url_for('/staff/show-image-info.php?image_id=' . h(u($images['image_id']))); ?>">View Image Information</a>
-                    </div>
+                  <img class="image1" src="../upload-images/<?= $images['file_name'] ?>" alt="<?php echo h($images['caption']); ?>">
+                  <div  class="add-employee">
+                    <a href="<?php echo url_for('/staff/show-image-info.php?image_id=' . h(u($images['image_id']))); ?>">View Image Information</a>
+                  </div>
                 </fieldset>
                 
               <?php }
